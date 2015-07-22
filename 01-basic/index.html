@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Playing around with d3.js</title>
+        <link rel='stylesheet' href='style.css'>
+        <script>
+            /**
+             * Create a dataset to work with. This will consist of objects with
+             * four random numbers.
+             */
+            function createDataPoint () {
+                return {
+                    x: Math.random(),
+                    y: Math.random(),
+                    r: Math.random(),
+                    s: Math.random()
+                };
+            }
+
+            var dataset = [];
+            for (var i = 0; i < 25; i++) {
+                dataset.push(createDataPoint());
+            }
+        </script>
+    </head>
+    <body>
+        <svg id='svg'></svg>
+        <!-- lib -->
+        <script src='../src/d3.js'></script>
+        <!-- magic :) -->
+        <script src='js.js'></script>
+    </body>
+</html>
