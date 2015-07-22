@@ -6,6 +6,7 @@ var data = dataset || [],
         .attr('height', svgH),
     scaleX = d3.scale.linear().domain([1990, 2015]).range([10, 890]),
     scaleY = d3.scale.linear().domain([0, 1]).range([10, 490]),
+    scaleY2 = d3.scale.linear().domain([0, 1]).range([10, 700]),    // used in animation
     btn = document.getElementById('btn');
 
 // Add some circles to canvas (see 01-basic if this makes no sense).
@@ -20,20 +21,21 @@ var circles = svg
     .attr('r', 10)
     .attr('fill', 'red');
 
-var dropCircles = () => {
-    // Modify our scale to have a different rage.
-    var newScaleY = scaleY.range([10, 200]);
-
+var jump = () => {
     d3.selectAll('circle')
         .transition()
-        .duration(1000)
-        .delay(d => d.perc * 500)                   // Don't start at the same time
-        .attr('cy', d => svgH - newScaleY(d.perc))  // Apply new scale
-        .attr('fill', 'green');                     // And change color
-
-    // Note: Since the data points are not sorted, the animation will happen in
-    // random order.
+        .duration(300)
+        .delay(d => d.perc * 200)                   // Start with lowest first
+        .attr('cy', d => svgH - scaleY2(d.perc))    // Apply new scale
+        .attr('fill', 'green')                      // And change color
+        .each('end', function () {                  // When animation ends...
+            d3.select(this)                         // Find "this" circle...
+                .transition()
+                .duration(300)
+                .attr('cy', d => svgH - scaleY(d.perc)) // Apply old scale
+                .attr('fill', 'red')                    // And change color back
+        });
 };
 
-btn.addEventListener('click', dropCircles, false);
+btn.addEventListener('click', jump, false);
 
