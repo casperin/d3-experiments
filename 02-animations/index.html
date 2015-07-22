@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Playing around with d3.js</title>
+        <link rel='stylesheet' href='style.css'>
+        <script>
+            /**
+             * Create a dataset to work with.
+             * Something like an array of {year: 1990, perc: .339283}
+             * Year being between 1990 and 2015, perc between 0 and 1.
+             */
+            function createDataPoint () {
+                return {
+                    year: Math.floor(1990 + Math.random() * 25), 
+                    perc: Math.random()
+                };
+            }
+
+            var dataset = [];
+            for (var i = 0; i < 25; i++) {
+                dataset.push(createDataPoint());
+            }
+        </script>
+    </head>
+    <body>
+        <button id='btn'>Drop circles</button>
+        <svg id='svg'></svg>
+        <!-- lib -->
+        <script src='../src/d3.js'></script>
+        <!-- magic :) -->
+        <script src='js.js'></script>
+    </body>
+</html>
