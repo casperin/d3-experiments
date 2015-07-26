@@ -11,6 +11,10 @@ body {
 }
 
 .bar text {
+    fill: transparent;
+}
+
+.bar:hover text {
     fill: white;
 }
 
